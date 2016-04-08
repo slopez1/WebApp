@@ -58,7 +58,7 @@ class Has_Grade(models.Model):
     year_finished=models.IntegerField()
 
     
-class Has_Competency(Models.Model):
+class Has_Competency(models.Model):
     code_u=models.ForeignKey(User)
     code_c=models.ForeignKey(Grade)
     experience_since_year=models.IntegerField()
