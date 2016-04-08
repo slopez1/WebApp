@@ -7,7 +7,7 @@ class User(models.Model):
     code_u=models.IntegerField()
     name=models.TextField(max_length = 50)
     age=models.IntegerField()
-    gender=models.CharField(max_length=4,choices=tipus,unique=True)
+    gender=models.CharField(max_length=4,choices=tipus,unique=False)
     is_looking_for_job=models.TextField(blank=True, null=True)
     
     def __unicode__(self):
@@ -21,7 +21,7 @@ class Job(models.Model):
     tipus = (('p','primari'),('s','secundari'),('t','terciari'))
     code_j=models.IntegerField()
     name=models.TextField(max_length = 50)
-    sector=models.CharField(max_length=15,choices=tipus,unique=True)
+    sector=models.CharField(max_length=15,choices=tipus,unique=False)
     
     def __unicode__(self):
         return  self.code_j
@@ -33,7 +33,7 @@ class Grade(models.Model):
     tipus = (('C','Ciencies'),('L','Lletres'),('A','Art'))
     code_g=models.IntegerField()
     name_g=models.TextField(max_length = 50)
-    area=models.CharField(max_length=15,choices=tipus,unique=True)
+    area=models.CharField(max_length=15,choices=tipus,unique=False)
     description=models.TextField(max_length = 150)
     def __unicode__(self):
         return self.code_c
@@ -44,7 +44,7 @@ class competency (models.Model):
     tipus = (('C','Ciencies'),('L','Lletres'),('A','Art'))
     code_c=models.IntegerField()
     name_c=models.TextField(max_length = 50)
-    area=models.CharField(max_length=15,choices=tipus,unique=True)
+    area=models.CharField(max_length=15,choices=tipus,unique=False)
     description=models.TextField(max_length = 150)
     def __unicode__(self):
         return self.code_c
