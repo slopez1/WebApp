@@ -1,0 +1,13 @@
+{% extends "JobApp/base.html" %}
+{% block content%}
+<h1> 
+    Competencies 
+</h1>
+<ul>
+    {% for competency in competency_list %}
+        <li><a href="{% url 'JobApp:CompetencyDetail'  competency.id %}"> 
+            {{ competency.name_c }} </a></li>
+    {% empty %} <li>Sorry, no competencies registered yet.</li>
+    {% endfor %}  
+</ul>
+{% endblock	%}

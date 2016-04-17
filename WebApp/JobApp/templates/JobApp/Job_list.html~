@@ -1,0 +1,14 @@
+{% extends "JobApp/base.html" %}
+{% block content%}
+<h1> 
+    Jobs
+    {% if Users %}(<a href="{% url 'Users:User' %}">add</a>){% endif	%}
+</h1>
+<ul>
+    {% for job in job_list %}
+        <li><a href="{% url 'JobApp:JobDetail'  job.id %}"> 
+            {{ job.name }} </a></li>
+    {% empty %} <li>Sorry, no jobs registered yet.</li>
+    {% endfor %}  
+</ul>
+{% endblock	%}

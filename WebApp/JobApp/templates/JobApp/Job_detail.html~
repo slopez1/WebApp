@@ -1,0 +1,37 @@
+{% extends "JobApp/base.html" %}
+{% block content %}
+
+<h1>
+    {{ job.name }}
+</h1>
+<p>
+    <ul>
+        <li><b>Code: </b> {{ job.code_j }} </li>
+        <li><b>Job's name: </b> {{ job.name }} </li>
+        <li><b>Job's sector: </b> {{ job.sector  }} </li>
+    </ul>
+</p>
+
+<p>
+    <b>Grades required: </b> <br />
+    <ul>
+    {% for grade in job.grades.all %}
+        <li><a href="{% url 'JobApp:GradeDetail'  grade.code_g.id %}">{{ grade.code_g.name_g }}</a></li>
+        {% empty %} <li>Sorry, no grades registered yet.</li> 
+    {% endfor %} 
+    </ul>
+</p>
+
+<p>
+     <b>Competencies required: </b> <br />
+     <ul>
+     {% for competency in job.competencies.all %}
+        <li><a href="{% url 'JobApp:CompetencyDetail'  competency.code_c.id %}">{{ competency.code_c.name_c }}</a></li>
+        {% empty %} <li>Sorry, no users registered yet.</li> 
+     {% endfor %} 
+     </ul>
+</p>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

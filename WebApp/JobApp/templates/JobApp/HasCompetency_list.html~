@@ -1,0 +1,14 @@
+{% extends "JobApp/base.html" %}
+{% block content%}
+<h1> 
+    Users 
+    {% if Users %}(<a href="{% url 'Users:User' %}">add</a>){% endif %}
+</h1>
+<ul>
+    {% for hascompetency in hasCompetency_list %}
+        <li><a href="{% url 'JobApp:HasCompetencyDetail'  hascompetency.id %}"> 
+            {{ hascompetency.name }} </a></li>
+    {% empty %} <li>Sorry, no relations between competencies and users registered yet.</li>
+    {% endfor %}  
+</ul>
+{% endblock	%}

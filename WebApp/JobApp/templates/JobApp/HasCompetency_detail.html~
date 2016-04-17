@@ -1,0 +1,16 @@
+{% extends "JobApp/base.html" %}
+{% block content %}
+
+<h1>
+    {{ user.name }}
+</h1>
+<p>
+    {{ hascompetency.code_u }} <br />
+    {{ hascompetency.code_c }} <br />
+    {{ hascompetency.enperience_since_year }} <br />
+
+</p>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

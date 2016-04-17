@@ -1,0 +1,14 @@
+{% extends "WebApp/base.html" %}
+{% block content%}
+<h1> 
+    Restaurants 
+    {% if user %}(<a href="{% url 'Users:User' %}">add</a>){% endif	%}
+</h1>
+<ul>
+    {% for User in User_list %}
+        <li><a href="{%	url	'myrestaurants:restaurant_detail' restaurant.id %}">
+            {{ User.name }}</a></li>
+    {% empty %}<li>Sorry, no Users registered	yet.</li>
+    {% endfor %}
+</ul>
+{% endblock	%}

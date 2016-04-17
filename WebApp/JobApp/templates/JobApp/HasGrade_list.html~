@@ -1,0 +1,14 @@
+{% extends "JobApp/base.html" %}
+{% block content%}
+<h1> 
+    Users 
+    {% if Users %}(<a href="{% url 'Users:User' %}">add</a>){% endif %}
+</h1>
+<ul>
+    {% for hasgrade in hasgrade_list %}
+        <li><a href="{% url 'JobApp:HasGradeDetail'  user.id %}"> 
+            {{ hasgrade.name }} </a></li>
+    {% empty %} <li>Sorry, no relations between grades and users registered yet.</li>
+    {% endfor %}  
+</ul>
+{% endblock	%}

@@ -1,0 +1,19 @@
+{% extends "JobApp/base.html" %}
+{% block content %}
+
+<h1>
+    {{ grade.name_g }}
+</h1>
+
+<p>
+    <ul>
+        <li><b>Code: </b>{{ grade.code_g }} </li>
+        <li><b>Name: </b> {{ grade.name_g }} </li>
+        <li><b>Area: </b>{{ grade.area }} </li>
+        <li><b>Description: </b>{{ grade.description }} </li>
+    </ul>
+</p>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
