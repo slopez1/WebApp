@@ -16,21 +16,21 @@
 </p>
 
 <p>
-    <b> Grades required: </b> <br/>
+    <b> Grades: </b> <br/>
     <ul>
     {% for grade in user.grades.all %}
         <li><a href="{% url 'JobApp:GradeDetail'  grade.code_g.id %}">{{ grade.code_g.name_g }}</a></li>
-        {% empty %} <li>Sorry, no users registered yet.</li> 
+        {% empty %} <li>Sorry, no grades registered yet.</li> 
     {% endfor %} 
     </ul>
 </p>
 
 <p>
-    <b> Competencies required: </b> <br/>
+    <b> Competencies: </b> <br/>
     <ul>
     {% for competency in user.competencies.all %}
         <li><a href="{% url 'JobApp:CompetencyDetail'  competency.code_c.id %}">{{ competency.code_c.name_c }}</a></li>
-        {% empty %} <li>Sorry, no users registered yet.</li> 
+        {% empty %} <li>Sorry, no competencies registered yet.</li> 
     {% endfor %} 
     </ul>
 </p>

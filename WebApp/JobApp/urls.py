@@ -1,10 +1,17 @@
-from django.conf.urls import patterns,url
+from django.conf.urls import patterns,url,include
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView
 from models import User,Job,Competency,Grade,Has_Grade,Has_Competency
 from views import  JobDetail, UserDetail, GradeDetail, CompetencyDetail
 
 from views import APIUserList, APIUserDetail, APIJobList, APIJobDetail, APIGradeList, APIGradeDetail, APICompetencyList, APICompetencyDetail
+
+from rest_framework.authtoken.views import obtain_auth_token
+#from board.urls import router
+
+#router = DefaultRouter()
+#router.register(r'User',views.UserViewSet)
+#router.register(r'Grade',views.GradeViewSet)
 
 urlpatterns = patterns('',
     url(r'^$',ListView.as_view(

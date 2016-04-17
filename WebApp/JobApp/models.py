@@ -35,7 +35,7 @@ class Grade(models.Model):
     def __unicode__(self):
         return u"%i" % self.code_g
     def get_absolute_url(self):
-        return reverse('JobApp:GradeDetail',kwargs={'pk':self.pk})
+        return reverse('JobApp:grade-detail',kwargs={'pk':self.pk})
 
 
 class Competency(models.Model):
@@ -47,7 +47,7 @@ class Competency(models.Model):
     def __unicode__(self):
         return u"%i" % self.code_c
     def get_absolute_url(self):
-        return reverse('JobApp:CompetencyDetail',kwargs={'pk':self.pk})
+        return reverse('JobApp:competency-detail',kwargs={'pk':self.pk})
     
     
 class Has_Grade(models.Model):

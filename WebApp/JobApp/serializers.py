@@ -5,31 +5,27 @@ from models import Job, User, Grade, Competency
 
 
 class UserSerializer(HyperlinkedModelSerializer):
-    url = HyperlinkedIdentityField(view_name = 'JobApp:UserDetail')
-    grades_set = HyperlinkedRelatedField(many = True, read_only = True, view_name = 'JobApp:GradeDetail')
-    competencies_set = HyperlinkedRelatedField(many = True, read_only = True, view_name = 'JobApp:CompetencyDetail')
+    url = HyperlinkedIdentityField(view_name = 'JobApp:user-detail')
     class Meta:
         model = User
-        fields = ('url', 'code_u', 'name', 'age', 'gender', 'is_looking_for_a_job', 'grades_set', 'competencies_set')
+        fields = ('url', 'code_u', 'name', 'age', 'gender', 'is_looking_for_job')
 
 
 class JobSerializer(HyperlinkedModelSerializer):
-    url = HyperlinkedIdentityField(view_name = 'JobApp:JobDetail')
-    grades_set = HyperlinkedRelatedField(many = True, read_only = True, view_name = 'JobApp:GradeDetail')
-    competencies_set = HyperlinkedRelatedField(many = True, read_only = True, view_name = 'JobApp:CompetencyDetail')
+    url = HyperlinkedIdentityField(view_name = 'JobApp:job-detail')
     class Meta:
         model = Job
-        fields = ('url', 'code_j', 'name', 'sector', 'grades_set', 'competencies_set')
+        fields = ('url', 'code_j', 'name', 'sector')
 
 class GradeSerializer(HyperlinkedModelSerializer):
-    url = HyperlinkedIdentityField(view_name = 'JobApp:GradeDetail')
+    url = HyperlinkedIdentityField(view_name = 'JobApp:grade-detail')
     class Meta:
         model = Grade
-        fields = ('url', 'code_g', 'name', 'area', 'description')
+        fields = ('url', 'code_g', 'name_g', 'area', 'description')
 
 
 class CompetencySerializer(HyperlinkedModelSerializer):
-    url = HyperlinkedIdentityField(view_name = 'JobApp:CompetencyDetail')
+    url = HyperlinkedIdentityField(view_name = 'JobApp:competency-detail')
     class Meta:
         model = Competency
-        fields = ('url', 'code_c', 'name', 'area', 'description')
+        fields = ('url', 'code_c', 'name_c', 'area', 'description')

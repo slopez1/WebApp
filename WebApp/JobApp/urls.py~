@@ -1,10 +1,17 @@
-from django.conf.urls import patterns,url
+from django.conf.urls import patterns,url,include
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView
 from models import User,Job,Competency,Grade,Has_Grade,Has_Competency
 from views import  JobDetail, UserDetail, GradeDetail, CompetencyDetail
 
 from views import APIUserList, APIUserDetail, APIJobList, APIJobDetail, APIGradeList, APIGradeDetail, APICompetencyList, APICompetencyDetail
+
+from rest_framework.authtoken.views import obtain_auth_token
+#from board.urls import router
+
+#router = DefaultRouter()
+#router.register(r'User',views.UserViewSet)
+#router.register(r'Grade',views.GradeViewSet)
 
 urlpatterns = patterns('',
     url(r'^$',ListView.as_view(
@@ -51,7 +58,7 @@ urlpatterns = patterns('',
         CompetencyDetail.as_view(),
         name='CompetencyDetail')
         ,
-    #url(r'^api/$', 'api_root'),
+    url(r'^api/$', 'api_root'),
     url(r'^api/job/$',APIJobList.as_view(),name='job-list'),
     url(r'^api/job/(?P<pk>\d+)/$',APIJobDetail.as_view(),name='job-detail'),
     url(r'^api/user/$',APIUserList.as_view(),name='user-list'),

@@ -35,7 +35,7 @@ class Grade(models.Model):
     def __unicode__(self):
         return u"%i" % self.code_g
     def get_absolute_url(self):
-        return reverse('JobApp:GradeDetail',kwargs={'pk':self.pk})
+        return reverse('JobApp:grade-detail',kwargs={'pk':self.pk})
 
 
 class Competency(models.Model):
@@ -47,7 +47,7 @@ class Competency(models.Model):
     def __unicode__(self):
         return u"%i" % self.code_c
     def get_absolute_url(self):
-        return reverse('JobApp:CompetencyDetail',kwargs={'pk':self.pk})
+        return reverse('JobApp:competency-detail',kwargs={'pk':self.pk})
     
     
 class Has_Grade(models.Model):
@@ -58,18 +58,18 @@ class Has_Grade(models.Model):
 
     
 class Has_Competency(models.Model):
-    code_u=models.ForeignKey(User)
-    code_c=models.ForeignKey(Competency,related_name='competencies')
+    code_u=models.ForeignKey(User,related_name='competencies')
+    code_c=models.ForeignKey(Competency,)
     experience_since_year=models.IntegerField()
     
 
 class Need_Grade(models.Model):
-    code_j = models.ForeignKey(Job)
+    code_j = models.ForeignKey(Job,related_name="grades")
     code_g = models.ForeignKey(Grade)
     
    
 class Need_Competency(models.Model):
-    code_j = models.ForeignKey(Job)
+    code_j = models.ForeignKey(Job,related_name="competencies")
     code_c = models.ForeignKey(Competency)
     
 

@@ -7,12 +7,29 @@ from django.views.generic.edit import CreateView
 from models import User,Job,Competency,Grade,Has_Competency,Has_Grade,Need_Competency,Need_Grade
 
 
-from rest_framework import generics
+from rest_framework import generics,authentication,permissions,viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 from serializers import UserSerializer, JobSerializer, GradeSerializer, CompetencySerializer
+
+from django.contrib.auth import get_user_model
+
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    """
+    The entry endpoint of our API
+    """
+    return Response({
+        'User': reverse('user-list', request=request),
+        'Job': reverse('job-list', request=request),
+        'Grade': reverse('grade-list', request=request),
+        'Competency': reverse('competency-list', request=request),
+
+    })
+
 
 # Create your views here.
 
@@ -53,40 +70,50 @@ class CompetencyDetail(DetailView):
         return context
 
 class APIUserList(generics.ListCreateAPIView):
+    queryset=User.objects.all()
     model = User
     serializer_class = UserSerializer
 
 
 class APIUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=User.objects.all() 
     model = User
     serializer_class = UserSerializer
 
     
 class APIJobList(generics.ListCreateAPIView):
+    queryset=Job.objects.all()
     model = Job
     serializer_class = JobSerializer
 
 
 class APIJobDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Job.objects.all()
     model = Job
     serializer_class = JobSerializer
 
     
+    
 class APIGradeList(generics.ListCreateAPIView):
+    queryset=Grade.objects.all()
     model = Grade
     serializer_class = GradeSerializer
+    
 
 
 class APIGradeDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Grade.objects.all()
     model = Grade
     serializer_class = GradeSerializer
 
     
 class APICompetencyList(generics.ListCreateAPIView):
+    queryset=Competency.objects.all()
     model = Competency
     serializer_class = CompetencySerializer
 
 
 class APICompetencyDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Competency.objects.all()
     model = Competency
     serializer_class = CompetencySerializer
