@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from models import Job, User, Grade, Competency
-
+from django import forms
 
 class JobForm(ModelForm):
 	class Meta:

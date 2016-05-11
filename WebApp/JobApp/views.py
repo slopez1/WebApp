@@ -4,7 +4,7 @@ from django.http  import  HttpResponseRedirect
 from django.shortcuts  import  get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
-from models import User,Job,Competency,Grade,Has_Competency,Has_Grade,Need_Competency,Need_Grade
+from models import User,Job,Competency,Grade
 
 
 from rest_framework import generics,authentication,permissions,viewsets
@@ -39,7 +39,7 @@ def api_root(request, format=None):
 # Create your views here.
 
 class JobDetail(DetailView):
-    model =	Job
+    model = Job
     template_name = 'JobApp/Job_detail.html'
     
     def get_context_data(self, **kwargs):
@@ -69,6 +69,7 @@ class UserCreate(CreateView):
 		form.instance.user =  self.request.user
 		form.instance.code_u =  User.objects.latest('id').id+1
 		return super(UserCreate, self).form_valid(form)
+
 
         
 class UserDetail(DetailView):

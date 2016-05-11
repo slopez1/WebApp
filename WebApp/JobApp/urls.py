@@ -1,7 +1,7 @@
 from django.conf.urls import patterns,url,include
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView
-from models import User,Job,Competency,Grade,Has_Grade,Has_Competency
+from models import User,Job,Competency,Grade
 from views import  JobDetail, UserDetail, GradeDetail, CompetencyDetail, JobCreate, UserCreate, GradeCreate, CompetencyCreate
 
 from views import APIUserList, APIUserDetail, APIJobList, APIJobDetail, APIGradeList, APIGradeDetail, APICompetencyList, APICompetencyDetail
