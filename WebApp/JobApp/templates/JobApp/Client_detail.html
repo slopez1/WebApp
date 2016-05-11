@@ -1,0 +1,42 @@
+{% extends "JobApp/base.html" %}
+{% block content %}
+
+<h1>
+    {{ client.name }}
+</h1>
+	{% if user.username %}
+		<a href="{% url 'JobApp:Client_edit' client.id   %}">Edit {{ client.name }}</a>	
+        {% endif %}
+<p>
+    <ul>
+        <li><b>Code: </b>{{ client.code_u }}</li>
+        <li><b>Name: </b>{{ client.name }} </li>
+        <li><b>Age: </b>{{ client.age }} </li>
+        <li><b>Gender: </b>{{ client.gender }} </li>
+        <li><b>Is the User looking for a Job?: </b> {{ client.is_looking_for_job }} </li>
+    </ul>
+</p>
+
+<p>
+    <b> Grades: </b> <br/>
+    <ul>
+    {% for grade in client.grades.all %}
+        <li><a href="{% url 'JobApp:GradeDetail'  grade.id %}">{{ grade.name_g }}</a></li>
+        {% empty %} <li>Sorry, no grades registered yet.</li> 
+    {% endfor %} 
+    </ul>
+</p>
+
+<p>
+    <b> Competencies: </b> <br/>
+    <ul>
+    {% for competency in client.competencies.all %}
+        <li><a href="{% url 'JobApp:CompetencyDetail'  competency.id %}">{{ competency.name_c }}</a></li>
+        {% empty %} <li>Sorry, no competencies registered yet.</li> 
+    {% endfor %} 
+    </ul>
+</p>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}

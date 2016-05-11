@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from models import Job, User, Grade, Competency
+from models import Job, Client, Grade, Competency
 from django import forms
 
 class JobForm(ModelForm):
@@ -7,9 +7,9 @@ class JobForm(ModelForm):
 		model= Job
 		exclude = ('code_j',)
 
-class UserForm(ModelForm):
+class ClientForm(ModelForm):
 	class Meta:
-		model= User
+		model= Client
 		exclude = ('code_u',)
 
 class GradeForm(ModelForm):

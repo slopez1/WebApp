@@ -4,7 +4,7 @@ from django.http  import  HttpResponseRedirect
 from django.shortcuts  import  get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
-from models import User,Job,Competency,Grade
+from models import Client,Job,Competency,Grade
 
 
 from rest_framework import generics,authentication,permissions,viewsets
@@ -12,14 +12,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from serializers import UserSerializer, JobSerializer, GradeSerializer, CompetencySerializer
+from serializers import ClientSerializer, JobSerializer, GradeSerializer, CompetencySerializer
 
 from django.contrib.auth import get_user_model
 
 
 
 
-from forms import JobForm, UserForm, GradeForm, CompetencyForm
+from forms import JobForm, ClientForm, GradeForm, CompetencyForm
 
 
 @api_view(['GET'])
@@ -28,7 +28,7 @@ def api_root(request, format=None):
     The entry endpoint of our API
     """
     return Response({
-        'User': reverse('user-list', request=request),
+        'Client': reverse('client-list', request=request),
         'Job': reverse('job-list', request=request),
         'Grade': reverse('grade-list', request=request),
         'Competency': reverse('competency-list', request=request),
@@ -60,24 +60,24 @@ class JobCreate(CreateView):
 		form.instance.code_j =  Job.objects.latest('id').id+1
 		return super(JobCreate, self).form_valid(form)
 
-class UserCreate(CreateView):
-	model= User
+class ClientCreate(CreateView):
+	model= Client
 	template_name='JobApp/form.html'
-	form_class = UserForm
+	form_class = ClientForm
 	
 	def form_valid(self, form):
 		form.instance.user =  self.request.user
-		form.instance.code_u =  User.objects.latest('id').id+1
-		return super(UserCreate, self).form_valid(form)
+		form.instance.code_u = Client.objects.latest('id').id+1
+		return super(ClientCreate, self).form_valid(form)
 
 
         
-class UserDetail(DetailView):
-    model =	User
-    template_name = 'JobApp/User_detail.html'
+class ClientDetail(DetailView):
+    model = Client
+    template_name = 'JobApp/Client_detail.html'
     
     def get_context_data(self, **kwargs):
-        context = super(UserDetail, self).get_context_data(**kwargs)
+        context = super(ClientDetail, self).get_context_data(**kwargs)
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
 
@@ -92,7 +92,7 @@ class GradeCreate(CreateView):
 		return super(GradeCreate, self).form_valid(form)
 
 class GradeDetail(DetailView):
-    model =	Grade
+    model = Grade
     template_name = 'JobApp/Grade_detail.html'
     
     def get_context_data(self, **kwargs):
@@ -120,16 +120,16 @@ class CompetencyDetail(DetailView):
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
 
-class APIUserList(generics.ListCreateAPIView):
-    queryset=User.objects.all()
-    model = User
-    serializer_class = UserSerializer
+class APIClientList(generics.ListCreateAPIView):
+    queryset=Client.objects.all()
+    model = Client
+    serializer_class = ClientSerializer
 
 
-class APIUserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset=User.objects.all() 
-    model = User
-    serializer_class = UserSerializer
+class APIClientDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Client.objects.all() 
+    model = Client
+    serializer_class = ClientSerializer
 
     
 class APIJobList(generics.ListCreateAPIView):

@@ -4,7 +4,9 @@
 <h1>
     {{ grade.name_g }}
 </h1>
-
+	{% if user.username %}
+		<a href="{% url 'JobApp:Grade_edit' grade.id   %}">Edit {{ grade.name_g }}</a>	
+        {% endif %}
 <p>
     <ul>
         <li><b>Code: </b>{{ grade.code_g }} </li>

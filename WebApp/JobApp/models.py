@@ -27,7 +27,7 @@ class Competency(models.Model):
         return reverse('JobApp:CompetencyDetail',kwargs={'pk':self.pk})
     
  
-class User(models.Model):
+class Client(models.Model):
 	tipus = (('dona','dona'),('home','home'))
 	code_u=models.IntegerField()
 	name=models.TextField(max_length = 50)
@@ -39,7 +39,7 @@ class User(models.Model):
 	def __unicode__(self):
 		return u"%i" % self.code_u
 	def get_absolute_url(self):
-		return reverse('JobApp:UserDetail',kwargs={'pk':self.pk})
+		return reverse('JobApp:ClientDetail',kwargs={'pk':self.pk})
         
 
 class Job(models.Model):

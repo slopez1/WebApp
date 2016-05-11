@@ -4,7 +4,9 @@
 <h1> 
     Competencies 
 </h1>
-
+	{% if user.username %}
+		<a href="{% url 'JobApp:Competency_create'   %}">Add New Competency</a>	
+        {% endif %}
 <ul>
     {% for competency in competency_list %}
         <li><a href="{% url 'JobApp:CompetencyDetail'  competency.id %}"> 

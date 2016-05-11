@@ -4,7 +4,9 @@
 <h1> 
     Grades
 </h1>
-
+	{% if user.username %}
+		<a href="{% url 'JobApp:Grade_create'   %}">Add New Grade</a>	
+        {% endif %}
 <ul>
     {% for grade in grade_list %}
         <li><a href="{% url 'JobApp:GradeDetail'  grade.id %}"> 

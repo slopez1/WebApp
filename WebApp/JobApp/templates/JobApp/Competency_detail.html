@@ -4,7 +4,9 @@
 <h1>
   {{ competency.name_c }}
 </h1>
-
+	{% if user.username %}
+		<a href="{% url 'JobApp:Competency_edit' competency.id   %}">Edit {{ competency.name_c }}</a>	
+        {% endif %}
 <p>
 
    <ul>

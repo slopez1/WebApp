@@ -1,10 +1,18 @@
 {% extends "JobApp/base.html" %}
 {% block content %}
-	<form method="post" action="">
+
+
+
+	{% if user.username %}
+            <form method="post" action="">
 		{% csrf_token %}
 		<table>
 			{{ form.as_table }}
 		</table>
 		<input type="submit" value="Submit"/>
-	</form>
+	    </form>
+        {% else %}
+            <p>You're not allowed to make this action.</p>
+        {% endif %}
+	
 {% endblock %}

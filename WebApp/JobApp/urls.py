@@ -1,19 +1,19 @@
 from django.conf.urls import patterns,url,include
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView
-from models import User,Job,Competency,Grade
-from views import  JobDetail, UserDetail, GradeDetail, CompetencyDetail, JobCreate, UserCreate, GradeCreate, CompetencyCreate
+from models import Client,Job,Competency,Grade
+from views import  JobDetail, ClientDetail, GradeDetail, CompetencyDetail, JobCreate, ClientCreate, GradeCreate, CompetencyCreate
 
-from views import APIUserList, APIUserDetail, APIJobList, APIJobDetail, APIGradeList, APIGradeDetail, APICompetencyList, APICompetencyDetail
-
+from views import APIClientList, APIClientDetail, APIJobList, APIJobDetail, APIGradeList, APIGradeDetail, APICompetencyList, APICompetencyDetail
+from forms import ClientForm, GradeForm, CompetencyForm, JobForm
 from rest_framework.authtoken.views import obtain_auth_token
 #from board.urls import router
 
 #router = DefaultRouter()
-#router.register(r'User',views.UserViewSet)
+#router.register(r'Client',views.ClientViewSet)
 #router.register(r'Grade',views.GradeViewSet)
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$',ListView.as_view(
             queryset='',
             context_object_name='',
@@ -31,19 +31,48 @@ urlpatterns = patterns('',
         JobDetail.as_view(),
         name='JobDetail')
         , 
-    url(r'^User/$',
+
+     url(r'^Job/(?P<pk>\d+)/edit/$',
+        UpdateView.as_view(
+	    model = Job,
+	    template_name = 'JobApp/form.html',
+	    form_class = JobForm),
+        name='Job_edit'),
+
+
+
+
+
+    url(r'^Client/$',
         ListView.as_view(
-            queryset=User.objects.all(),
-            context_object_name='user_list',
-            template_name='JobApp/User_list.html'),
-        name='User_list'), 
-    url(r'^User/create/$',
-        UserCreate.as_view(),
-	name='User_create'),   
-    url(r'^User/(?P<pk>\d+)/$',
-        UserDetail.as_view(),
-        name='UserDetail')
-        ,
+            queryset=Client.objects.all(),
+            context_object_name='client_list',
+            template_name='JobApp/Client_list.html'),
+        name='Client_list'),
+
+
+    url(r'^Client/create/$',
+        ClientCreate.as_view(),
+	name='Client_create'),   
+
+
+    url(r'^Client/(?P<pk>\d+)/$',
+        ClientDetail.as_view(),
+        name='ClientDetail'),
+
+
+    url(r'^Client/(?P<pk>\d+)/edit/$',
+        UpdateView.as_view(
+	    model = Client,
+	    template_name = 'JobApp/form.html',
+	    form_class = ClientForm),
+        name='Client_edit'),
+
+
+
+
+
+
     url(r'^Grade/$',
         ListView.as_view(
             queryset=Grade.objects.all(),
@@ -56,8 +85,14 @@ urlpatterns = patterns('',
 	name='Grade_create'),
     url(r'^Grade/(?P<pk>\d+)/$',
         GradeDetail.as_view(),
-        name='GradeDetail')
-        ,
+        name='GradeDetail'),
+
+    url(r'^Grade/(?P<pk>\d+)/edit/$',
+        UpdateView.as_view(
+	    model = Grade,
+	    template_name = 'JobApp/form.html',
+	    form_class = GradeForm),
+        name='Grade_edit'),
     url(r'^Competency/$',
         ListView.as_view(
             queryset=Competency.objects.all(),
@@ -69,17 +104,23 @@ urlpatterns = patterns('',
 	name='Competency_create'),   
     url(r'^Competency/(?P<pk>\d+)/$',
         CompetencyDetail.as_view(),
-        name='CompetencyDetail')
-        ,
+        name='CompetencyDetail'),
+
+    url(r'^Competency/(?P<pk>\d+)/edit/$',
+        UpdateView.as_view(
+	    model = Competency,
+	    template_name = 'JobApp/form.html',
+	    form_class = CompetencyForm),
+        name='Competency_edit'),
     #url(r'^api/$', 'api_root'),
     url(r'^api/job/$',APIJobList.as_view(),name='job-list'),
     url(r'^api/job/(?P<pk>\d+)/$',APIJobDetail.as_view(),name='job-detail'),
-    url(r'^api/user/$',APIUserList.as_view(),name='user-list'),
-    url(r'^api/user/(?P<pk>\d+)/$',APIUserDetail.as_view(),name='user-detail'),
+    url(r'^api/client/$',APIClientList.as_view(),name='client-list'),
+    url(r'^api/client/(?P<pk>\d+)/$',APIClientDetail.as_view(),name='client-detail'),
     url(r'^api/grade/$',APIGradeList.as_view(),name='grade-list'),
     url(r'^api/grade/(?P<pk>\d+)/$',APIGradeDetail.as_view(),name='grade-detail'),
     url(r'^api/competency/$',APICompetencyList.as_view(),name='competency-list'),
     url(r'^api/competency/(?P<pk>\d+)/$',APICompetencyDetail.as_view(),name='competency-detail'),
-        )
+        ]
  
     

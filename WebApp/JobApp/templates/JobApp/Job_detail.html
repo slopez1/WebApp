@@ -4,6 +4,9 @@
 <h1>
     {{ job.name }}
 </h1>
+	{% if user.username %}
+		<a href="{% url 'JobApp:Job_edit' job.id   %}">Edit {{ job.name }}</a>	
+        {% endif %}
 <p>
     <ul>
         <li><b>Code: </b> {{ job.code_j }} </li>
@@ -16,7 +19,7 @@
     <b>Grades required: </b> <br />
     <ul>
     {% for grade in job.grades.all %}
-        <li><a href="{% url 'JobApp:GradeDetail'  grade.code_g.id %}">{{ grade.code_g.name_g }}</a></li>
+        <li><a href="{% url 'JobApp:GradeDetail'  grade.id %}">{{ grade.name_g }}</a></li>
         {% empty %} <li>Sorry, no grades registered yet.</li> 
     {% endfor %} 
     </ul>
@@ -26,7 +29,7 @@
      <b>Competencies required: </b> <br />
      <ul>
      {% for competency in job.competencies.all %}
-        <li><a href="{% url 'JobApp:CompetencyDetail'  competency.code_c.id %}">{{ competency.code_c.name_c }}</a></li>
+        <li><a href="{% url 'JobApp:CompetencyDetail'  competency.id %}">{{ competency.name_c }}</a></li>
         {% empty %} <li>Sorry, no users registered yet.</li> 
      {% endfor %} 
      </ul>
