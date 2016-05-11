@@ -17,6 +17,11 @@ from serializers import UserSerializer, JobSerializer, GradeSerializer, Competen
 from django.contrib.auth import get_user_model
 
 
+
+
+from forms import JobForm, UserForm, GradeForm, CompetencyForm
+
+
 @api_view(['GET'])
 def api_root(request, format=None):
     """
@@ -41,6 +46,30 @@ class JobDetail(DetailView):
         context = super(JobDetail, self).get_context_data(**kwargs)
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
+
+
+
+
+class JobCreate(CreateView):
+	model=Job
+	template_name='JobApp/form.html'
+	form_class = JobForm
+	
+	def form_valid(self, form):
+		form.instance.user =  self.request.user
+		form.instance.code_j =  Job.objects.latest('id').id+1
+		return super(JobCreate, self).form_valid(form)
+
+class UserCreate(CreateView):
+	model= User
+	template_name='JobApp/form.html'
+	form_class = UserForm
+	
+	def form_valid(self, form):
+		form.instance.user =  self.request.user
+		form.instance.code_u =  User.objects.latest('id').id+1
+		return super(UserCreate, self).form_valid(form)
+
         
 class UserDetail(DetailView):
     model =	User
@@ -51,6 +80,16 @@ class UserDetail(DetailView):
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
 
+class GradeCreate(CreateView):
+	model= Grade
+	template_name='JobApp/form.html'
+	form_class = GradeForm
+	
+	def form_valid(self, form):
+		form.instance.user =  self.request.user
+		form.instance.code_g =  Grade.objects.latest('id').id+1
+		return super(GradeCreate, self).form_valid(form)
+
 class GradeDetail(DetailView):
     model =	Grade
     template_name = 'JobApp/Grade_detail.html'
@@ -59,6 +98,17 @@ class GradeDetail(DetailView):
         context = super(GradeDetail, self).get_context_data(**kwargs)
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
+
+class CompetencyCreate(CreateView):
+	model= Competency
+	template_name='JobApp/form.html'
+	form_class = CompetencyForm
+	
+	def form_valid(self, form):
+		form.instance.user =  self.request.user
+		form.instance.code_c =  Competency.objects.latest('id').id+1
+		return super(CompetencyCreate, self).form_valid(form)
+
 
 class CompetencyDetail(DetailView):
     model =	Competency

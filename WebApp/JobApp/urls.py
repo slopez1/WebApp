@@ -2,7 +2,7 @@ from django.conf.urls import patterns,url,include
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView
 from models import User,Job,Competency,Grade,Has_Grade,Has_Competency
-from views import  JobDetail, UserDetail, GradeDetail, CompetencyDetail
+from views import  JobDetail, UserDetail, GradeDetail, CompetencyDetail, JobCreate, UserCreate, GradeCreate, CompetencyCreate
 
 from views import APIUserList, APIUserDetail, APIJobList, APIJobDetail, APIGradeList, APIGradeDetail, APICompetencyList, APICompetencyDetail
 
@@ -24,6 +24,9 @@ urlpatterns = patterns('',
             context_object_name='job_list',
             template_name='JobApp/Job_list.html'),
         name='Job_list'),
+    url(r'^Job/create/$',
+        JobCreate.as_view(),
+	name='Job_create'),
     url(r'^Job/(?P<pk>\d+)/$',
         JobDetail.as_view(),
         name='JobDetail')
@@ -33,7 +36,10 @@ urlpatterns = patterns('',
             queryset=User.objects.all(),
             context_object_name='user_list',
             template_name='JobApp/User_list.html'),
-        name='User_list'),    
+        name='User_list'), 
+    url(r'^User/create/$',
+        UserCreate.as_view(),
+	name='User_create'),   
     url(r'^User/(?P<pk>\d+)/$',
         UserDetail.as_view(),
         name='UserDetail')
@@ -44,6 +50,10 @@ urlpatterns = patterns('',
             context_object_name='grade_list',
             template_name='JobApp/Grade_list.html'),
         name='Grade_list'),
+
+    url(r'^Grade/create/$',
+        GradeCreate.as_view(),
+	name='Grade_create'),
     url(r'^Grade/(?P<pk>\d+)/$',
         GradeDetail.as_view(),
         name='GradeDetail')
@@ -53,7 +63,10 @@ urlpatterns = patterns('',
             queryset=Competency.objects.all(),
             context_object_name='competency_list',
             template_name='JobApp/Competency_list.html'),
-        name='Competency_list'),    
+        name='Competency_list'), 
+     url(r'^Competency/create/$',
+        CompetencyCreate.as_view(),
+	name='Competency_create'),   
     url(r'^Competency/(?P<pk>\d+)/$',
         CompetencyDetail.as_view(),
         name='CompetencyDetail')

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.urlresolvers import reverse
 # Create your models here.
 
 class User(models.Model):
@@ -17,7 +17,7 @@ class User(models.Model):
 
 class Job(models.Model):
     tipus = (('primari','primari'),('secundari','secundari'),('terciari','terciari'))
-    code_j=models.IntegerField()
+    code_j=models.IntegerField(unique=True)
     name=models.TextField(max_length = 50)
     sector=models.CharField(max_length=15,choices=tipus,unique=False)
     def __unicode__(self):
@@ -35,7 +35,7 @@ class Grade(models.Model):
     def __unicode__(self):
         return u"%i" % self.code_g
     def get_absolute_url(self):
-        return reverse('JobApp:grade-detail',kwargs={'pk':self.pk})
+        return reverse('JobApp:GradeDetail',kwargs={'pk':self.pk})
 
 
 class Competency(models.Model):
@@ -47,7 +47,7 @@ class Competency(models.Model):
     def __unicode__(self):
         return u"%i" % self.code_c
     def get_absolute_url(self):
-        return reverse('JobApp:competency-detail',kwargs={'pk':self.pk})
+        return reverse('JobApp:CompetencyDetail',kwargs={'pk':self.pk})
     
     
 class Has_Grade(models.Model):
