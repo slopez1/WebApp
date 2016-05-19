@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse 
 from django.http  import  HttpResponseRedirect
 from django.shortcuts  import  get_object_or_404
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView,DeleteView
 from django.views.generic.edit import CreateView
 from models import Client,Job,Competency,Grade
 
@@ -11,7 +11,7 @@ from rest_framework import generics,authentication,permissions,viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-
+from django.core.urlresolvers import reverse_lazy
 from serializers import ClientSerializer, JobSerializer, GradeSerializer, CompetencySerializer
 
 from django.contrib.auth import get_user_model
@@ -47,7 +47,9 @@ class JobDetail(DetailView):
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
 
-
+class JobDelete(DeleteView):
+	model = Job
+	success_url ="../.."
 
 
 class JobCreate(CreateView):
@@ -66,11 +68,14 @@ class ClientCreate(CreateView):
 	form_class = ClientForm
 	
 	def form_valid(self, form):
-		form.instance.user =  self.request.user
-		form.instance.code_u = Client.objects.latest('id').id+1
+		form.instance.user = self.request.user
+		form.instance.code_u = Client.objects.exists()		
+		if form.instance.code_u != 0:
+			form.instance.code_u = Client.objects.latest('id').id+1
+
 		return super(ClientCreate, self).form_valid(form)
 
-
+#restriccio: com a mini hi ha d'haver un client
         
 class ClientDetail(DetailView):
     model = Client
@@ -80,6 +85,11 @@ class ClientDetail(DetailView):
         context = super(ClientDetail, self).get_context_data(**kwargs)
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
+
+class ClientDelete(DeleteView):
+	model = Client
+	success_url ="../.."
+
 
 class GradeCreate(CreateView):
 	model= Grade
@@ -100,6 +110,10 @@ class GradeDetail(DetailView):
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
 
+class GradeDelete(DeleteView):
+	model = Grade
+	success_url ="../.."
+
 class CompetencyCreate(CreateView):
 	model= Competency
 	template_name='JobApp/form.html'
@@ -119,6 +133,10 @@ class CompetencyDetail(DetailView):
         context = super(CompetencyDetail, self).get_context_data(**kwargs)
         #context['RATING_CHOICES'] =	RestaurantReview.RATING_CHOICES
         return context
+
+class CompetencyDelete(DeleteView):
+	model = Competency
+	success_url ="../.."
 
 class APIClientList(generics.ListCreateAPIView):
     queryset=Client.objects.all()
