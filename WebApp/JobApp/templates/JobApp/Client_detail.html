@@ -5,7 +5,8 @@
     {{ client.name }}
 </h1>
 	{% if user.username %}
-		<a href="{% url 'JobApp:Client_edit' client.id   %}">Edit {{ client.name }}</a>	
+		<a href="{% url 'JobApp:Client_edit' client.id   %}">Edit {{ client.name }}</a>	<br />
+		<a href="{% url 'JobApp:Client_delete' client.id   %}">Delete {{ client.name }}</a>
         {% endif %}
 <p>
     <ul>

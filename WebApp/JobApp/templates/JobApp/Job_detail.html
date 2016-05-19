@@ -5,7 +5,8 @@
     {{ job.name }}
 </h1>
 	{% if user.username %}
-		<a href="{% url 'JobApp:Job_edit' job.id   %}">Edit {{ job.name }}</a>	
+		<a href="{% url 'JobApp:Job_edit' job.id   %}">Edit {{ job.name }}</a>	<br />
+		<a href="{% url 'JobApp:Job_delete' job.id   %}">Delete {{ job.name }}</a>	
         {% endif %}
 <p>
     <ul>
