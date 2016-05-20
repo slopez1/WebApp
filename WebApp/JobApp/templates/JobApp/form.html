@@ -1,9 +1,14 @@
 {% extends "JobApp/base.html" %}
+{% load staticfiles %}
 {% block content %}
-
-	{% if user.username %}
-		<script>
+<script>
         $(function() {
+		$.getJSON("{% static "zodiacs.json" %}", {}, function (zodiacs) {
+                $("#id_zodiac_sign").autocomplete({
+                    source: zodiacs
+                });
+            });
+
             $("#id_id_city").autocomplete({
                 source: function( request, response ) {
                     $.ajax({
@@ -38,6 +43,8 @@
             });
         });
  </script>
+	{% if user.username %}
+		
             <form method="post" action="">
 		{% csrf_token %}
 		<table>

@@ -69,9 +69,7 @@ class ClientCreate(CreateView):
 	
 	def form_valid(self, form):
 		form.instance.user = self.request.user
-		form.instance.code_u = Client.objects.exists()		
-		if form.instance.code_u != 0:
-			form.instance.code_u = Client.objects.latest('id').id+1
+		form.instance.code_u = Client.objects.latest('id').id+1
 
 		return super(ClientCreate, self).form_valid(form)
 
