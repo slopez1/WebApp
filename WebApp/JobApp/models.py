@@ -33,6 +33,7 @@ class Client(models.Model):
 	name=models.TextField(max_length = 50)
 	age=models.IntegerField()
 	gender=models.CharField(max_length=4,choices=tipus,unique=False)
+	id_city =models.TextField(default="")
 	is_looking_for_job=models.TextField(blank=True, null=True)
 	grades = models.ManyToManyField(Grade)
 	competencies = models.ManyToManyField(Competency)
@@ -47,6 +48,7 @@ class Job(models.Model):
 	code_j=models.IntegerField(unique=True)
 	name=models.TextField(max_length = 50)
 	sector=models.CharField(max_length=15,choices=tipus,unique=False)
+	id_city =models.TextField(default="")
 	grades = models.ManyToManyField(Grade)
 	competencies = models.ManyToManyField(Competency)
 	def __unicode__(self):
