@@ -1,8 +1,8 @@
 {% extends "JobApp/base.html" %}
 {% block content %}
-
+<span vocab="http://schema.org/" typeof="JobPosting">
 <h1>
-    {{ job.name }}
+<span property="title">{{ job.name }}</span>  
 </h1>
 	{% if user.username %}
 		<a href="{% url 'JobApp:Job_edit' job.id   %}">Edit {{ job.name }}</a>	<br />
@@ -10,15 +10,18 @@
         {% endif %}
 <p>
     <ul>
-        <li><b>Name: </b> {{ job.name }} </li>
-        <li><b>Sector: </b> {{ job.sector  }} </li>
-	<li><b>City: </b>{{ job.id_city }} </li>
+        <li><b>Name: </b> <span property="name">{{ job.name }}</span>  </li>
+        <li><b>Sector: </b><span property="industry">{{ job.sector  }}</span></li>
+	<li><b>City:</b>
+		<span property="jobLocation" typeof="Place">
+			<span property="address">{{ job.id_city }}</span>
+		</span> </li>
     </ul>
 </p>
 
 <p>
     <b>Grades required: </b> <br />
-    <ul>
+    <ul property="educationRequirements">
     {% for grade in job.grades.all %}
         <li><a href="{% url 'JobApp:GradeDetail'  grade.id %}">{{ grade.name_g }}</a></li>
         {% empty %} <li>Sorry, no grades registered yet.</li> 
@@ -28,14 +31,14 @@
 
 <p>
      <b>Competencies required: </b> <br />
-     <ul>
+     <ul property="skills">
      {% for competency in job.competencies.all %}
         <li><a href="{% url 'JobApp:CompetencyDetail'  competency.id %}">{{ competency.name_c }}</a></li>
         {% empty %} <li>Sorry, no users registered yet.</li> 
      {% endfor %} 
      </ul>
 </p>
-
+</span>
 {% endblock %}
 {% block footer %}
 {% endblock %}
