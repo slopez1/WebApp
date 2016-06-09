@@ -18,6 +18,25 @@
    
 </p>
 
+
+<h3>Clients amb les competencies</h3>
+<ul>
+    {% for client in competency.clients.all %}
+        <li><a href="{% url 'JobApp:ClientDetail'  client.id %}"> 
+            {{ client.name }} </a></li>
+            {% empty %} <li>Sorry, no client registered yet.</li>
+    {% endfor %}  
+</ul>
+
+
+<h3>Jobs amb els graus</h3>
+<ul>
+    {% for job in competency.jobs.all %}
+        <li><a href="{% url 'JobApp:JobDetail'  job.id %}"> 
+        {{ job.name }} </a></li>
+        {% empty %} <li>Sorry, no jobs registered yet.</li>
+    {% endfor %}  
+</ul>
 {% endblock %}
 {% block footer %}
 {% endblock %}

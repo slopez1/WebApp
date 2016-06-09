@@ -36,8 +36,8 @@ class Client(models.Model):
 	zodiac_sign = models.CharField(default="Pisces", max_length=20)
 	id_city =models.CharField(default="Lleida", max_length=50)
 	is_looking_for_job=models.CharField(max_length = 30, blank=True, null=True)
-	grades = models.ManyToManyField(Grade)
-	competencies = models.ManyToManyField(Competency)
+	grades = models.ManyToManyField(Grade,related_name='clientss')
+	competencies = models.ManyToManyField(Competency,related_name='clients')
 	def __unicode__(self):
 		return u"%i" % self.code_u
 	def get_absolute_url(self):
@@ -50,8 +50,8 @@ class Job(models.Model):
 	name=models.CharField(max_length = 50)
 	sector=models.CharField(max_length=15,choices=tipus,unique=False)
 	id_city =models.CharField(default="Lleida", max_length=50)
-	grades = models.ManyToManyField(Grade)
-	competencies = models.ManyToManyField(Competency)
+	grades = models.ManyToManyField(Grade,related_name='jobss')
+	competencies = models.ManyToManyField(Competency,related_name='jobs')
 	
 	def __unicode__(self):
 		return  u"%i" % self.code_j

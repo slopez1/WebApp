@@ -16,6 +16,30 @@
     </ul>
 </p>
 
+
+
+<h3>Clients amb el graus</h3>
+<ul>
+    {% for client in grade.clientss.all %}
+        <li><a href="{% url 'JobApp:ClientDetail'  client.id %}"> 
+            {{ client.name }} </a></li>
+            {% empty %} <li>Sorry, no client registered yet.</li>
+    {% endfor %}  
+</ul>
+
+
+<h3>Clients amb les graus</h3>
+<ul>
+    {% for job in grade.jobss.all %}
+        <li><a href="{% url 'JobApp:JobDetail'  job.id %}"> 
+        {{ job.name }} </a></li>
+        {% empty %} <li>Sorry, no jobs registered yet.</li>
+    {% endfor %}  
+</ul>
+
+
+
+
 {% endblock %}
 {% block footer %}
 {% endblock %}

@@ -2,6 +2,7 @@ from django.conf.urls import patterns,url,include
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, UpdateView, DeleteView
 from models import Client,Job,Competency,Grade
+from views import JobList, ClientList, CompetencyList, GradeList
 from views import JobDetail, ClientDetail, GradeDetail, CompetencyDetail
 from views import JobCreate, ClientCreate, GradeCreate, CompetencyCreate
 from views import ClientDelete, GradeDelete, JobDelete, CompetencyDelete
@@ -19,11 +20,10 @@ urlpatterns = [
             queryset='',
             context_object_name='',
             template_name='JobApp/main.html'),name='Home'),
+
+
     url(r'^Job/$',
-        ListView.as_view(
-            queryset=Job.objects.all(),
-            context_object_name='job_list',
-            template_name='JobApp/Job_list.html'),
+        JobList.as_view(),
         name='Job_list'),
 
     url(r'^Job/(?P<pk>\d+)/delete/$',
@@ -47,10 +47,7 @@ urlpatterns = [
 
 
     url(r'^Client/$',
-        ListView.as_view(
-            queryset=Client.objects.all(),
-            context_object_name='client_list',
-            template_name='JobApp/Client_list.html'),
+        ClientList.as_view(),
         name='Client_list'),
 
     url(r'^Client/(?P<pk>\d+)/delete/$',
@@ -76,10 +73,7 @@ urlpatterns = [
 
 
     url(r'^Grade/$',
-        ListView.as_view(
-            queryset=Grade.objects.all(),
-            context_object_name='grade_list',
-            template_name='JobApp/Grade_list.html'),
+        GradeList.as_view(),
         name='Grade_list'),
 
     url(r'^Grade/(?P<pk>\d+)/delete/$',
@@ -101,10 +95,7 @@ urlpatterns = [
         name='Grade_edit'),
 
     url(r'^Competency/$',
-        ListView.as_view(
-            queryset=Competency.objects.all(),
-            context_object_name='competency_list',
-            template_name='JobApp/Competency_list.html'),
+        CompetencyList.as_view(),
         name='Competency_list'), 
 
     url(r'^Competency/(?P<pk>\d+)/delete/$',
