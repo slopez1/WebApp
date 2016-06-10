@@ -4,10 +4,11 @@
 <h1>
     {{ grade.name_g }}
 </h1>
-	{% if user.username %}
-		<a href="{% url 'JobApp:Grade_edit' grade.id   %}">Edit {{ grade.name_g }}</a>	<br />
-		<a href="{% url 'JobApp:Grade_delete' grade.id   %}">Delete {{ grade.name_g }}</a>	
-        {% endif %}
+{% if user.username %}
+	<a href="{% url 'JobApp:Grade_edit' grade.id   %}">Edit {{ grade.name_g }}</a>	<br />
+	<a href="{% url 'JobApp:Grade_delete' grade.id   %}">Delete {{ grade.name_g }}</a>	
+{% endif %}
+
 <p>
     <ul>
         <li><b>Name: </b> {{ grade.name_g }} </li>
@@ -16,28 +17,25 @@
     </ul>
 </p>
 
+<h3>Clients with its grades</h3>
 
-
-<h3>Clients amb el graus</h3>
 <ul>
-    {% for client in grade.clientss.all %}
-        <li><a href="{% url 'JobApp:ClientDetail'  client.id %}"> 
-            {{ client.name }} </a></li>
-            {% empty %} <li>Sorry, no client registered yet.</li>
-    {% endfor %}  
+	{% for client in grade.clientss.all %}
+        	<li><a href="{% url 'JobApp:ClientDetail'  client.id %}"> 
+            	{{ client.name }} </a></li>
+	{% empty %} <li>Sorry, no client registered yet.</li>
+    	{% endfor %}  
 </ul>
 
+<h3>Clients with its grades</h3>
 
-<h3>Clients amb les graus</h3>
 <ul>
-    {% for job in grade.jobss.all %}
-        <li><a href="{% url 'JobApp:JobDetail'  job.id %}"> 
-        {{ job.name }} </a></li>
+	{% for job in grade.jobss.all %}
+    		<li><a href="{% url 'JobApp:JobDetail'  job.id %}"> 
+        	{{ job.name }} </a></li>
         {% empty %} <li>Sorry, no jobs registered yet.</li>
-    {% endfor %}  
+    	{% endfor %}  
 </ul>
-
-
 
 
 {% endblock %}

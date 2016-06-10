@@ -7,11 +7,11 @@
 		<a href="{% url 'JobApp:Job_create'   %}">Add New Job</a>	
         {% endif %}
 <ul>
-    {% for job in job_list %}
-        <li><a href="{% url 'JobApp:JobDetail'  job.id %}"> 
-        {{ job.name }} </a></li>
+	{% for job in job_list %}
+		<li><a href="{% url 'JobApp:JobDetail'  job.id %}"> 
+        	{{ job.name }} </a></li>
         {% empty %} <li>Sorry, no jobs registered yet.</li>
-    {% endfor %}  
+    	{% endfor %}  
 </ul>
 
-{% endblock	%}
+{% endblock %}

@@ -1,16 +1,20 @@
 {% extends "JobApp/base.html" %}
 {% block content%}
+
 <h1> 
     Clients 
 </h1>
-	{% if user.username %}
-		<a href="{% url 'JobApp:Client_create'   %}">Add New Client</a>	
-        {% endif %}
+	
+{% if user.username %}
+	<a href="{% url 'JobApp:Client_create'   %}">Add New Client</a>	
+{% endif %}
+
 <ul>
     {% for client in client_list %}
         <li><a href="{% url 'JobApp:ClientDetail'  client.id %}"> 
-            {{ client.name }} </a></li>
-            {% empty %} <li>Sorry, no client registered yet.</li>
+        {{ client.name }} </a></li>
+    {% empty %} <li>Sorry, no client registered yet.</li>
     {% endfor %}  
 </ul>
-{% endblock	%}
+
+{% endblock %}

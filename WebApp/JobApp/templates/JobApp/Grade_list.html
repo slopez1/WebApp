@@ -4,15 +4,17 @@
 <h1> 
     Grades
 </h1>
-	{% if user.username %}
-		<a href="{% url 'JobApp:Grade_create'   %}">Add New Grade</a>	
-        {% endif %}
+
+{% if user.username %}
+	<a href="{% url 'JobApp:Grade_create'   %}">Add New Grade</a>	
+{% endif %}
+
 <ul>
-    {% for grade in grade_list %}
-        <li><a href="{% url 'JobApp:GradeDetail'  grade.id %}"> 
-        {{ grade.name_g }} </a></li>
+	{% for grade in grade_list %}
+		<li><a href="{% url 'JobApp:GradeDetail'  grade.id %}"> 
+        	{{ grade.name_g }} </a></li>
         {% empty %} <li>Sorry, no grades registered yet.</li>
-    {% endfor %}  
+   	{% endfor %}  
 </ul>
 
-{% endblock	%}
+{% endblock %}

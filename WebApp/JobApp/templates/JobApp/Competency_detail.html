@@ -4,10 +4,12 @@
 <h1>
   {{ competency.name_c }}
 </h1>
-	{% if user.username %}
-		<a href="{% url 'JobApp:Competency_edit' competency.id   %}">Edit {{ competency.name_c }}</a> <br />
-		<a href="{% url 'JobApp:Competency_delete' competency.id   %}">Delete {{ competency.name_c }}</a>	
-        {% endif %}
+
+{% if user.username %}
+	<a href="{% url 'JobApp:Competency_edit' competency.id   %}">Edit {{ competency.name_c }}</a> <br />
+	<a href="{% url 'JobApp:Competency_delete' competency.id   %}">Delete {{ competency.name_c }}</a>	
+{% endif %}
+
 <p>
 
    <ul>
@@ -19,24 +21,24 @@
 </p>
 
 
-<h3>Clients amb les competencies</h3>
+<h3>Clients with its competencies</h3>
 <ul>
     {% for client in competency.clients.all %}
         <li><a href="{% url 'JobApp:ClientDetail'  client.id %}"> 
-            {{ client.name }} </a></li>
-            {% empty %} <li>Sorry, no client registered yet.</li>
+        {{ client.name }} </a></li>
+    {% empty %} <li>Sorry, no client registered yet.</li>
     {% endfor %}  
 </ul>
 
-
-<h3>Jobs amb els graus</h3>
+<h3>Jobs with its grades</h3>
 <ul>
     {% for job in competency.jobs.all %}
         <li><a href="{% url 'JobApp:JobDetail'  job.id %}"> 
         {{ job.name }} </a></li>
-        {% empty %} <li>Sorry, no jobs registered yet.</li>
+    {% empty %} <li>Sorry, no jobs registered yet.</li>
     {% endfor %}  
 </ul>
+
 {% endblock %}
 {% block footer %}
 {% endblock %}

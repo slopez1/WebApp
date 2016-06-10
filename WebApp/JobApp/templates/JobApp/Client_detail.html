@@ -1,44 +1,56 @@
 {% extends "JobApp/base.html" %}
 {% block content %}
-
-<h1>
-    {{ client.name }}
-</h1>
+<span vocab="http://schema.org/" typeof="Person">
+	<h1>
+		<span property="name">{{ client.name }}</span>
+	</h1>
+	
 	{% if user.username %}
 		<a href="{% url 'JobApp:Client_edit' client.id   %}">Edit {{ client.name }}</a>	<br />
 		<a href="{% url 'JobApp:Client_delete' client.id   %}">Delete {{ client.name }}</a>
-        {% endif %}
-<p>
-    <ul>
-        <li><b>Name: </b>{{ client.name }} </li>
-        <li><b>Age: </b>{{ client.age }} </li>
-        <li><b>Gender: </b>{{ client.gender }} </li>
-	<li><b>City: </b>{{ client.id_city }} </li>
-	<li><b>Zodiac's sign: </b>{{ client.zodiac_sign }} </li>
-        <li><b>Is the User looking for a Job?: </b> {{ client.is_looking_for_job }} </li>
-    </ul>
-</p>
+	{% endif %}
 
-<p>
-    <b> Grades: </b> <br/>
-    <ul>
-    {% for grade in client.grades.all %}
-        <li><a href="{% url 'JobApp:GradeDetail'  grade.id %}">{{ grade.name_g }}</a></li>
-        {% empty %} <li>Sorry, no grades registered yet.</li> 
-    {% endfor %} 
-    </ul>
-</p>
+	<p>
+	    <ul>
+		<li><b>Name: </b> <span property="name">{{ client.name }}</span>  </li>
+		<li>
+			<b>Age:</b>
+			<span property="birthDate">{{ client.age }}</span>
+		</li>
+		<li><b>Gender: </b>
+			<span property="gender">{{ client.gender }}</span>
+		</li>
+		<li>
+			<b>City:</b>
+			<span property="address" typeof="PostalAddress">
+			<span property="addressLocality">{{ client.id_city }}</span>
+			</span> 
+		</li>
+		<li><b>Zodiac's sign: </b>{{ client.zodiac_sign }} </li>
+		<li><b>Is the User looking for a Job?: </b> {{ client.is_looking_for_job }} </li>
+	    </ul>
+	</p>
 
-<p>
-    <b> Competencies: </b> <br/>
-    <ul>
-    {% for competency in client.competencies.all %}
-        <li><a href="{% url 'JobApp:CompetencyDetail'  competency.id %}">{{ competency.name_c }}</a></li>
-        {% empty %} <li>Sorry, no competencies registered yet.</li> 
-    {% endfor %} 
-    </ul>
-</p>
+	<p>
+	    <b> Grades: </b> <br/>
+	    <ul>
+	    	{% for grade in client.grades.all %}
+			<li><a href="{% url 'JobApp:GradeDetail'  grade.id %}">{{ grade.name_g }}</a></li>
+			{% empty %} <li>Sorry, no grades registered yet.</li> 
+	    	{% endfor %} 
+	    </ul>
+	</p>
 
+	<p>
+	    <b> Competencies: </b> <br/>
+	    <ul>
+	    	{% for competency in client.competencies.all %}
+	       		<li><a href="{% url 'JobApp:CompetencyDetail'  competency.id %}">{{ competency.name_c }}</a></li>
+		{% empty %} <li>Sorry, no competencies registered yet.</li> 
+	    	{% endfor %} 
+	    </ul>
+	</p>
+</span>
 {% endblock %}
 {% block footer %}
 {% endblock %}
